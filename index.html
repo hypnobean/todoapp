@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="styles/light.css" id="light-theme" disabled>
+  
+  <title>Frontend Mentor | Todo app</title>
+
+
+</head>
+<body>
+  <div class="header">
+    <img src="images/bg-desktop-dark.jpg" id="img-dark-lg">
+    <img src="images/bg-desktop-light.jpg" id="img-light-lg">
+    <img src="images/bg-mobile-dark.jpg" id="img-dark-sm">
+    <img src="images/bg-mobile-light.jpg" id="img-light-sm">
+  </div>
+  <div class="card">
+    <div class="title"><h1>Todo</h1><img src="images/icon-sun.svg" id="icon-sun"><img src="images/icon-moon.svg" id="icon-moon"></div>
+<div class="create"><form id="theForm" name="form1">
+  <span></span>
+  <input type="text" name="text1" id="createTodo" placeholder="Create a new todo..."></form>
+</div>
+<form action="" id="theListForm">
+<ul class="list">
+<!-- <li id="placement">todo List will go here</li> -->
+</ul>
+</form>
+<div class="bottom"><span id="items-left"></span>
+  <div>
+    <input type="radio" name="display-button" id="button-all" checked><label for="button-all">All</label>
+    <input type="radio" name="display-button" id="button-active"><label for="button-active">Active</label>
+    <input type="radio" name="display-button" id="button-completed"><label for="button-completed">Completed</label>
+  </div>
+  <a href="" id="clearCompleted">Clear Completed</a>
+</div>
+
+<div>Drag and drop to reorder list</div>
+</div>
+
+
+
+  </div>
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Amanda Love</a>.
+  </div>
+
+
+
+
+  <script src="index.js"></script>
+</body>
+</html>

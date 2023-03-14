@@ -156,6 +156,9 @@ function beingDragged() {
         listItems[i].addEventListener('drag', function() {
             dragged = this
         })
+        listItems[i].addEventListener('touchstart', function() {
+            dragged = this
+        })
     }
     unorderedList.addEventListener("dragover", function(event) {
         event.preventDefault()
@@ -168,8 +171,11 @@ function beingDragged() {
         event.preventDefault()
         event.target = this
         this.after(dragged)
-    })
-}
-
-
+        })
+    listItems[i].addEventListener("touchend", function(event) {
+        event.preventDefault()
+        event.target = this
+        this.after(dragged)
+        })
+    }
 }

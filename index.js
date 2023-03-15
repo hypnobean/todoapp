@@ -153,30 +153,18 @@ function clearCompleted() {
 
 function beingDragged() {
     for (i = 0; i < listItems.length; i++) {
-        listItems[i].addEventListener('drag', function() {
+        listItems[i].addEventListener('dragstart', function() {
             dragged = this
         })
-        listItems[i].addEventListener('touchstart', function() {
-            dragged = this
-        },
-        { passive: true })
     }
+
+
 
     unorderedList.addEventListener('dragover', function(event) {
         event.preventDefault()
     },
         false
     )
-
-    unorderedList.addEventListener('touchmove', function(event) {
-        event.preventDefault()
-    },
-    { passive: true },
-    false
-        
-    )
-
-
 
 
     for (i = 0; i < listItems.length; i++) {
@@ -185,11 +173,5 @@ function beingDragged() {
         event.target = this
         this.after(dragged)
         })
-    listItems[i].addEventListener('touchend', function(event) {
-        event.preventDefault()
-        event.target = this
-        this.after(dragged)
-        },
-        { passive: true })
     }
 }

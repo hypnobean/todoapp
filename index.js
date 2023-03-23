@@ -162,9 +162,7 @@ function beingDragged() {
 
     unorderedList.addEventListener('dragover', function(event) {
         event.preventDefault()
-    },
-        false
-    )
+    })
 
 
     for (i = 0; i < listItems.length; i++) {

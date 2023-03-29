@@ -213,6 +213,7 @@ function beingDragged() {
 
     for (i = 0; i < listItems.length; i++) {
         listItems[i].addEventListener('drop', function(event){
+            event.preventDefault()
             this.after(document.getElementById(event.dataTransfer.getData('text')))
         })
     }

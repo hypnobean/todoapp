@@ -46,9 +46,10 @@ function createToDoList() {
     } else {
         toDoListItems.push(createTodo.value)
         listText = createTodo.value
-        indexOfPushed = toDoListItems.length
+        indexOfPushed = toDoListItems.length - 1
         let newListItem = document.createElement('li')
             newListItem.draggable = 'true'
+            newListItem.id = indexOfPushed
         let newInputItem = document.createElement('input')
             newInputItem.type = 'checkbox'
             newInputItem.id = 'item-' + indexOfPushed
@@ -58,7 +59,7 @@ function createToDoList() {
         let newStyledCheck = document.createElement('span')
             newStyledCheck.innerHTML = '<svg width="12px" height="9px" viewbox="0 0 12 9"><polyline points="1 5 4 8 11 1"></polyline></svg>'
         let newSpanText = document.createElement('span')
-            newSpanText.innerHTML = createTodo.value
+            newSpanText.innerText = createTodo.value
         unorderedList.append(newListItem)
         newListItem.append(newInputItem)
         newListItem.append(newLabelItem)
@@ -66,7 +67,7 @@ function createToDoList() {
         newLabelItem.append(newSpanText)
         createTodo.value = ''
         itemCount = toDoListItems.length
-        itemsCountDisplay.innerHTML = itemCount + ' items left'    
+        itemsCountDisplay.innerText = itemCount + ' items left'    
     }
     
     determineCompleted()
@@ -151,25 +152,69 @@ function clearCompleted() {
 
 // Drag function
 
+// function beingDragged() {
+//     for (i = 0; i < listItems.length; i++) {
+//         listItems[i].addEventListener('dragstart', function(event) {
+//             dragged = this
+//             console.log(dragged.childNodes[0].id)
+//         }) 
+//     }
+
+
+//     unorderedList.addEventListener('dragover', function(event) {
+//         event.preventDefault()
+//     },
+//         false
+//     )
+
+
+//     for (i = 0; i < listItems.length; i++) {
+//     listItems[i].addEventListener('drop', function(event) {
+//         event.preventDefault()
+//         event.target = this
+//         this.after(dragged)
+//         console.log(this.childNodes[0].id)
+//         })
+//     }
+// }
+
+//Touch Function 
+// function beingTouchDragged() {
+//     for (i = 0; i < listItems.length; i++) {
+//         listItems[i].addEventListener('touchstart', function(ev) {
+//             touched = this
+//             console.log(touched)
+//         }, 
+//         {
+//             passive: true
+//         })
+//     }
+
+
+//     for (i = 0; i < listItems.length; i++) {
+//         listItems[i].addEventListener('touchend', function(event) {
+//             console.log(event.changedTouches[0])
+//         })
+//     }
+
+// }
+
 function beingDragged() {
-    for (i = 0; i < listItems.length; i++) {
-        listItems[i].addEventListener('dragstart', function() {
-            dragged = this
+    document.querySelectorAll('[draggable="true"]').forEach(draggableItem => {
+        draggableItem.addEventListener('dragstart', (event) => {
+            event.dataTransfer.setData('text', draggableItem.id)
         })
-    }
+    })
 
-
-
-    unorderedList.addEventListener('dragover', function(event) {
+    document.addEventListener('dragover', (event) => {
         event.preventDefault()
     })
 
 
     for (i = 0; i < listItems.length; i++) {
-    listItems[i].addEventListener('drop', function(event) {
-        event.preventDefault()
-        event.target = this
-        this.after(dragged)
+        listItems[i].addEventListener('drop', function(event){
+            this.after(document.getElementById(event.dataTransfer.getData('text')))
         })
     }
+
 }

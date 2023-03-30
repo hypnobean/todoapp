@@ -29,7 +29,7 @@ lightIcon.addEventListener('click', function() {
 
 // Display number of list items on load
 function updateTotal() {
-    itemCount = toDoListItems.length - document.getElementsByClassName('completed-task').length
+    itemCount = listItems.length - document.getElementsByClassName('completed-task').length
     itemsCountDisplay.innerHTML = itemCount + ' items left'
 }
 
@@ -144,6 +144,8 @@ function clearCompleted() {
     Array.from(document.getElementsByClassName('completed-task')).forEach(completedTask => {
         event.preventDefault()
         completedTask.remove()
+        updateTotal()
+
     })
 }
 
@@ -151,54 +153,6 @@ function clearCompleted() {
 
 
 // Drag function
-
-// function beingDragged() {
-//     for (i = 0; i < listItems.length; i++) {
-//         listItems[i].addEventListener('dragstart', function(event) {
-//             dragged = this
-//             console.log(dragged.childNodes[0].id)
-//         }) 
-//     }
-
-
-//     unorderedList.addEventListener('dragover', function(event) {
-//         event.preventDefault()
-//     },
-//         false
-//     )
-
-
-//     for (i = 0; i < listItems.length; i++) {
-//     listItems[i].addEventListener('drop', function(event) {
-//         event.preventDefault()
-//         event.target = this
-//         this.after(dragged)
-//         console.log(this.childNodes[0].id)
-//         })
-//     }
-// }
-
-//Touch Function 
-// function beingTouchDragged() {
-//     for (i = 0; i < listItems.length; i++) {
-//         listItems[i].addEventListener('touchstart', function(ev) {
-//             touched = this
-//             console.log(touched)
-//         }, 
-//         {
-//             passive: true
-//         })
-//     }
-
-
-//     for (i = 0; i < listItems.length; i++) {
-//         listItems[i].addEventListener('touchend', function(event) {
-//             console.log(event.changedTouches[0])
-//         })
-//     }
-
-// }
-
 function beingDragged() {
     let draggableItem
     let draggedIndex
@@ -206,7 +160,6 @@ function beingDragged() {
 
     document.addEventListener('dragstart', function(event) {
         draggableItem = event.target.id
-        console.log(event.target)
         if (event.target.hasAttribute('draggable')) {
             event.dataTransfer.effectAllowed = 'move'
             event.dataTransfer.setData('text', draggableItem)

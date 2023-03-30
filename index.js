@@ -200,10 +200,22 @@ function clearCompleted() {
 // }
 
 function beingDragged() {
-    document.querySelectorAll('[draggable="true"]').forEach(draggableItem => {
-        draggableItem.addEventListener('dragstart', (event) => {
-            event.dataTransfer.setData('text', draggableItem.id)
-        })
+    let draggableItem
+    let draggedIndex
+    let droppedIndex
+
+    document.addEventListener('dragstart', function(event) {
+        draggableItem = event.target.id
+        console.log(event.target)
+        if (event.target.hasAttribute('draggable')) {
+            event.dataTransfer.effectAllowed = 'move'
+            event.dataTransfer.setData('text', draggableItem)
+            for (i = 0; i < listItems.length; i++) {
+                if (listItems[i] === event.target) {
+                    draggedIndex = i
+                }
+            }
+        }
     })
 
     document.addEventListener('dragover', (event) => {
@@ -211,11 +223,21 @@ function beingDragged() {
     })
 
 
-    for (i = 0; i < listItems.length; i++) {
-        listItems[i].addEventListener('drop', function(event){
-            event.preventDefault()
-            this.after(document.getElementById(event.dataTransfer.getData('text')))
-        })
-    }
+    document.addEventListener('drop', function(event) {
+        event.preventDefault()
+            if (event.target.hasAttribute('draggable') && event.target.id !== draggableItem) {
+                for (let i = 0; i < listItems.length; i++) {
+                    if (listItems[i] === event.target) {
+                        droppedIndex = i
+                    }
+                }
+                console.log(draggedIndex, droppedIndex)
+                if (draggedIndex > droppedIndex) {
+                    event.target.before(document.getElementById(event.dataTransfer.getData('text')))
+                } else {
+                    event.target.after(document.getElementById(event.dataTransfer.getData('text')))
+                }
+            }
+    })
 
 }
